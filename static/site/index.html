@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mind2App</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="main-header" id="main-header">
+    <a href="#" class="logo" onclick="window.location.reload(true)">Mind<span>2</span>App</a>
+    <button class="menu-toggle" onclick="toggleMenu()">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </header>
+
+  <div id="menuOverlay">
+    <a href="#">Über uns</a>
+    <a href="#features">Funktionen</a>
+    <a href="#">Kontakt</a>
+    <a href="#" onclick="toggleMenu()">✖ Schließen</a>
+  </div>
+
+  <section class="hero" id="hero">
+    <video autoplay muted loop playsinline class="background-video">
+      <source src="DesignCube.mp4" type="video/mp4" />
+      Dein Browser unterstützt das Video-Tag nicht.
+    </video>
+    <div class="hero-content">
+      <h1>Von deiner Idee zur App – automatisch.</h1>
+      <p>Beschreibe deine Idee, wir generieren deine App. Kostenlos. Offline. Mind2App.</p>
+      <a href="http://127.0.0.1:8000" class="cta-button">Jetzt starten</a>
+    </div>
+  </section>
+
+  <section id="features" class="features-section">
+    <div class="feature">
+      <h3>🧠 KI-Verständnis</h3>
+      <p>Mind2App erkennt deine Idee und erstellt passgenauen HTML-Code.</p>
+    </div>
+    <div class="feature">
+      <h3>📂 Exportierbar</h3>
+      <p>Lade deine App als HTML herunter und verwende sie direkt weiter.</p>
+    </div>
+    <div class="feature">
+      <h3>🖥️ Lokal & Sicher</h3>
+      <p>Keine Cloud. Alles läuft auf deinem Rechner. 100 % datensicher.</p>
+    </div>
+  </section>
+
+  <footer id="footer">
+    <p>&copy; 2025 Mind2App – gebaut mit Leidenschaft.</p>
+  </footer>
+
+  <script>
+    window.addEventListener("scroll", () => {
+      const header = document.getElementById("main-header");
+      if (window.scrollY > 10) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+    });
+
+    function toggleMenu() {
+      const overlay = document.getElementById("menuOverlay");
+      const hero = document.getElementById("hero");
+      overlay.classList.toggle("open");
+      hero.classList.toggle("shrink");
+    }
+  </script>
+</body>
+</html>

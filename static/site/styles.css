@@ -1,164 +1,80 @@
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: black;
-  color: white;
-  overflow-x: hidden;
-  overflow-y: auto;
-  height: 100%;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
+// === SCENE SETUP ===
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x000000); // komplett dunkel
 
-body::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-}
+const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 100);
+camera.position.set(0, 1.5, 6);
 
-html {
-  height: 100%;
-}
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.shadowMap.enabled = true;
+document.getElementById("three-canvas").appendChild(renderer.domElement);
 
-.main-header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(6px);
-  transition: background 0.3s ease-in-out;
-}
+// === LIGHTS ===
+const ambientLight = new THREE.AmbientLight(0x222222); // ganz leichte Grundbeleuchtung
+scene.add(ambientLight);
 
-.main-header.scrolled {
-  background: rgba(0, 0, 0, 0.6);
-}
+const pointLight = new THREE.PointLight(0xff00ff, 2, 20);
+pointLight.position.set(5, 5, 5);
+pointLight.castShadow = true;
+scene.add(pointLight);
 
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: white;
-  text-decoration: none;
-  cursor: pointer;
-}
+// === FLOOR REFLECTOR (SPIEGEL) ===
+const groundMirror = new THREE.Reflector(
+  new THREE.PlaneGeometry(10, 10),
+  {
+    color: new THREE.Color(0x111111),
+    textureWidth: window.innerWidth * window.devicePixelRatio,
+    textureHeight: window.innerHeight * window.devicePixelRatio,
+    clipBias: 0.003,
+    recursion: 1
+  }
+);
+groundMirror.rotateX(-Math.PI / 2);
+groundMirror.position.y = -1.5;
+scene.add(groundMirror);
 
-.logo span {
-  color: #00baff;
-}
+// === MATERIALS ===
+const geometry = new THREE.BoxGeometry(2, 2, 2);
 
-.menu-toggle {
-  background: none;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 5px;
-  z-index: 1100;
-  position: fixed;
-  top: 1.2rem;
-  right: 1.5rem;
-}
+// Farben pro Seite
+const colors = [
+  0xff00ff, 0x00ffff, 0x0000ff,
+  0xff0099, 0x6600ff, 0x00baff
+];
 
-.bar {
-  width: 25px;
-  height: 3px;
-  background-color: white;
-  border-radius: 2px;
-}
+const materials = colors.map(color =>
+  new THREE.MeshPhysicalMaterial({
+    color,
+    transparent: true,
+    opacity: 0.75,
+    metalness: 0.85,
+    roughness: 0.1,
+    emissive: color,
+    emissiveIntensity: 0.25,
+    reflectivity: 1.0,
+    clearcoat: 1.0,
+    clearcoatRoughness: 0.05
+  })
+);
 
-.hero {
-  height: 100vh;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 60px;
-  text-align: center;
-  overflow: hidden;
-}
+const cube = new THREE.Mesh(geometry, materials);
+cube.castShadow = true;
+cube.receiveShadow = false;
+scene.add(cube);
 
-#three-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-  pointer-events: none;
+// === ANIMATION ===
+function animate() {
+  requestAnimationFrame(animate);
+  cube.rotation.x += 0.01;
+  cube.rotation.y += 0.012;
+  renderer.render(scene, camera);
 }
+animate();
 
-.hero-content {
-  z-index: 1;
-  padding: 2rem;
-  max-width: 90%;
-}
-
-.cta-button {
-  background-color: #00baff;
-  padding: 0.8rem 2rem;
-  color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 2rem;
-  text-decoration: none;
-  margin-top: 1rem;
-  display: inline-block;
-  transition: transform 0.3s ease;
-}
-
-.cta-button:hover {
-  transform: scale(1.05);
-}
-
-.features-section {
-  background: #f9f9f9;
-  color: #222;
-  padding: 4rem 2rem;
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 2rem;
-}
-
-.feature {
-  max-width: 300px;
-  text-align: center;
-}
-
-footer {
-  background: #111;
-  text-align: center;
-  padding: 2rem;
-  font-size: 0.9rem;
-  color: #ccc;
-}
-
-#menuOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.95);
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-  transition: all 0.3s ease-in-out;
-}
-
-#menuOverlay.open {
-  display: flex;
-}
-
-#menuOverlay a {
-  color: white;
-  font-size: 1.8rem;
-  margin: 1rem;
-  text-decoration: none;
-}
+// === RESPONSIVE ===
+window.addEventListener("resize", () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});

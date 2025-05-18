@@ -6,6 +6,13 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   height: 100%;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 html {
@@ -79,8 +86,8 @@ html {
 .background-video {
   position: absolute;
   top: 0;
-  left: -20vw; /* weiter nach links verschoben für perfekte Zentrierung */
-  width: 100vw; /* etwas breiter um zentrales Objekt visuell perfekt zu platzieren */
+  left: -30vw; /* weiter nach links verschoben */
+  width: 130vw; /* vergrößert für sauberen Beschnitt */
   height: 100vh;
   object-fit: cover;
   z-index: -1;
@@ -90,6 +97,7 @@ html {
   z-index: 1;
   padding: 2rem;
   max-width: 90%;
+  margin-left: -5vw; /* leicht nach links verschoben */
 }
 
 .cta-button {
@@ -156,14 +164,4 @@ footer {
   font-size: 1.8rem;
   margin: 1rem;
   text-decoration: none;
-}
-
-body::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-}
-
-body {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 }

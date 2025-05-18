@@ -6,6 +6,13 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   height: 100%;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 html {
@@ -72,20 +79,14 @@ html {
   padding-top: 60px;
   text-align: center;
   overflow: hidden;
-  transition: all 0.4s ease;
 }
 
-.hero.shrink {
-  transform: scale(0.9);
-}
-
-.background-video {
+#three-canvas {
   position: absolute;
   top: 0;
-  left: -8vw; /* zentriert angepasst */
-  width: 115vw; /* reduzierte Breite für mittige Positionierung */
+  left: 0;
+  width: 100vw;
   height: 100vh;
-  object-fit: cover;
   z-index: -1;
 }
 
@@ -159,14 +160,4 @@ footer {
   font-size: 1.8rem;
   margin: 1rem;
   text-decoration: none;
-}
-
-body::-webkit-scrollbar {
-  width: 0;
-  height: 0;
-}
-
-body {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 }

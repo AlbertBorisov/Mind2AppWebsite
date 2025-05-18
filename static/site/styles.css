@@ -86,8 +86,8 @@ html {
 .background-video {
   position: absolute;
   top: 0;
-  left: -30vw; /* weiter nach links verschoben */
-  width: 130vw; /* vergrößert für sauberen Beschnitt */
+  left: -35vw; /* weiter nach links verschoben */
+  width: 140vw; /* vergrößert für sauberen Beschnitt */
   height: 100vh;
   object-fit: cover;
   z-index: -1;
@@ -97,7 +97,7 @@ html {
   z-index: 1;
   padding: 2rem;
   max-width: 90%;
-  margin-left: -5vw; /* leicht nach links verschoben */
+  margin-left: -10vw; /* leicht nach links verschoben */
 }
 
 .cta-button {

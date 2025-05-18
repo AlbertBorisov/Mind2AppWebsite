@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mind2App</title>
   <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/three@0.154/build/three.min.js"></script>
 </head>
 <body>
   <header class="main-header" id="main-header">
@@ -24,10 +25,7 @@
   </div>
 
   <section class="hero" id="hero">
-    <video autoplay muted loop playsinline class="background-video">
-      <source src="DesignCube.mp4" type="video/mp4" />
-      Dein Browser unterstützt das Video-Tag nicht.
-    </video>
+    <div id="three-canvas"></div>
     <div class="hero-content">
       <h1>Von deiner Idee zur App – automatisch.</h1>
       <p>Beschreibe deine Idee, wir generieren deine App. Kostenlos. Offline. Mind2App.</p>
@@ -54,22 +52,6 @@
     <p>&copy; 2025 Mind2App – gebaut mit Leidenschaft.</p>
   </footer>
 
-  <script>
-    window.addEventListener("scroll", () => {
-      const header = document.getElementById("main-header");
-      if (window.scrollY > 10) {
-        header.classList.add("scrolled");
-      } else {
-        header.classList.remove("scrolled");
-      }
-    });
-
-    function toggleMenu() {
-      const overlay = document.getElementById("menuOverlay");
-      const hero = document.getElementById("hero");
-      overlay.classList.toggle("open");
-      hero.classList.toggle("shrink");
-    }
-  </script>
+  <script src="cube.js"></script>
 </body>
 </html>

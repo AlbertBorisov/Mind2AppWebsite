@@ -6,13 +6,6 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   height: 100%;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-body::-webkit-scrollbar {
-  width: 0;
-  height: 0;
 }
 
 html {
@@ -58,6 +51,9 @@ html {
   justify-content: center;
   gap: 5px;
   z-index: 1100;
+  position: fixed;
+  top: 1.2rem;
+  right: 1.5rem;
 }
 
 .bar {
@@ -86,8 +82,8 @@ html {
 .background-video {
   position: absolute;
   top: 0;
-  left: -35vw; /* weiter nach links verschoben */
-  width: 140vw; /* vergrößert für sauberen Beschnitt */
+  left: -16vw; /* weiter nach links verschoben für perfekte Zentrierung */
+  width: 130vw; /* etwas breiter um zentrales Objekt visuell perfekt zu platzieren */
   height: 100vh;
   object-fit: cover;
   z-index: -1;
@@ -97,7 +93,6 @@ html {
   z-index: 1;
   padding: 2rem;
   max-width: 90%;
-  margin-left: -10vw; /* leicht nach links verschoben */
 }
 
 .cta-button {

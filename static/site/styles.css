@@ -79,7 +79,7 @@ html {
 .background-video {
   position: absolute;
   top: 0;
-  left: -10vw; /* weiter nach links verschoben für perfekte Zentrierung */
+  left: 2vw; /* weiter nach links verschoben für perfekte Zentrierung */
   width: 130vw; /* etwas breiter um zentrales Objekt visuell perfekt zu platzieren */
   height: 100vh;
   object-fit: cover;

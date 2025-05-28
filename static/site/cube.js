@@ -1,3 +1,4 @@
+console.log("🚀 cube.js wurde geladen!");
 // === VORAUSGESETZT: Reflector & Postprocessing via CDN ===
 const loaderScript = document.createElement("script");
 loaderScript.src = "https://cdn.jsdelivr.net/npm/three@0.154/examples/js/objects/Reflector.js";
